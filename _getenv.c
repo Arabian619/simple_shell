@@ -29,14 +29,14 @@ char *_getenv(const char *name)
 			value = strtok(NULL, "\n ");
 			if (value == NULL)
 			{
-				errors(4);
+				perror("Error");
 				exit(EXIT_FAILURE);
 			}
 			path_len = _strlen(value);
 			path = malloc(sizeof(char) * path_len + 1);
 			if (path == NULL)
 			{
-				errors(3);
+				perror("Error");
 				return (NULL);
 			}
 			path = _strcpy(path, value);
@@ -51,7 +51,7 @@ char *_getenv(const char *name)
 /**
  * copy_env - copies environment variable
  * @env_copy: pointer to copy of environment variable
- * @env_length: length of environment variable
+ * @env_len: length of environment variable
  * Return: double pointer to copy of environment variable
  */
 char **copy_env(char **env_copy, unsigned int env_len)
@@ -63,7 +63,7 @@ char **copy_env(char **env_copy, unsigned int env_len)
 	env_copy = malloc(sizeof(char **) * (env_len));
 	if (env_copy == NULL)
 	{
-		errors(3);
+		perror("Error");
 		return (NULL);
 	}
 
@@ -76,7 +76,7 @@ char **copy_env(char **env_copy, unsigned int env_len)
 		env_copy[i] = malloc(sizeof(char) * var_len + 1);
 		if (env_copy[i] == NULL)
 		{
-			errors(3);
+			perror("Error:");
 			return (NULL);
 		}
 		_strcpy(env_copy[i], environ[i]);
